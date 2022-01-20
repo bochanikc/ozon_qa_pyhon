@@ -1,5 +1,7 @@
+from urllib.parse import urljoin
 import requests
 import pytest
+from pytest_homework.constants import BASE_URL, ACCESS_TOKEN
 
 
 class ApiClient:
@@ -22,11 +24,13 @@ class ApiClient:
         return requests.post(url=url, params=params, headers=headers)
 
 
+API_URL = urljoin(BASE_URL, 'api/')
+IDS_URL = urljoin(BASE_URL, 'ids.html')
+
+
 @pytest.fixture(scope="session")
-def api_superheroapi(request):
-    BASE_URL = 'https://superheroapi.com/api/'
-    ACCESS_TOKEN = '2042120175955355'
-    return ApiClient(base_url=BASE_URL, access_token=ACCESS_TOKEN)
+def api_superheroapi():
+    return ApiClient(base_url=API_URL, access_token=ACCESS_TOKEN)
 
 
 @pytest.fixture()
@@ -34,4 +38,5 @@ def get_hero_by_id(api_superheroapi, id):
     result = api_superheroapi.get(
         path=f'/{id}'
     )
-    return result.json()
+    print(result.text)
+    return result
