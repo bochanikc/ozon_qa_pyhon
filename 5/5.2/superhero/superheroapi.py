@@ -33,7 +33,7 @@ def save_picture_on_disc(superhero):
     superhero_name = get_superhero_name(superhero)
     # response = requests.get(superhero_img_url)
     response = requests.get('https://i08.fotocdn.net/s107/5a11941e18370178/public_pin_l/2356233773.jpg')
-    # www.superherodb.com умер(
+    # www.superherodb.com умер :(
     if response.status_code == 200:
         with open(f'{superhero_name}.jpg', 'wb') as f:
             f.write(response.content)

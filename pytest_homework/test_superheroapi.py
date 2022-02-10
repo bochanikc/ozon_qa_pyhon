@@ -15,5 +15,7 @@ def test_woman_is_woman(get_hero_by_id):
     assert get_hero_by_id.json()['appearance']['gender'] == 'Female'
 
 
-def test_1():
-    print(get_woman_ids().text)
+def test_two_heroes_stronger(who_stronger):
+    who_stronger
+    #id1, id2, hero = who_stronger
+

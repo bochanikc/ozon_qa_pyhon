@@ -1,3 +1,4 @@
+import random
 from urllib.parse import urljoin
 import requests
 import pytest
@@ -34,9 +35,37 @@ def api_superheroapi():
 
 
 @pytest.fixture()
+def get_powerstats_by_id(api_superheroapi, id):
+    result = api_superheroapi.get(
+        path=f'/{id}/powerstats'
+    )
+    print(result.text)
+    return result
+
+
+@pytest.fixture()
+def get_random_hero_powerstats(get_powerstats_by_id):
+    while True:
+        result = get_powerstats_by_id(id=get_random_id)
+        if result is None:
+            continue
+        return result
+
+
+@pytest.fixture()
 def get_hero_by_id(api_superheroapi, id):
     result = api_superheroapi.get(
         path=f'/{id}'
     )
     print(result.text)
     return result
+
+
+@pytest.fixture()
+def who_stronger(get_random_hero_powerstats):
+    print(get_random_hero_powerstats)
+    return get_random_hero_powerstats
+
+@pytest.fixture()
+def get_random_id():
+    return random.randint(1, 701)
