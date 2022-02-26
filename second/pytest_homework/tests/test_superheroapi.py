@@ -1,5 +1,6 @@
 from second.pytest_homework.helpers import get_woman_ids, gen_param
 import pytest
+from second.pytest_homework.checkers.checkers import smoke_check
 
 
 
@@ -16,9 +17,17 @@ def test_woman_is_woman(get_hero_by_id):
     assert get_hero_by_id.json()['appearance']['gender'] == 'Female'
 
 
-def test_two_heroes_stronger(who_stronger):
-    who_stronger
-    # id1, id2, hero = who_stronger
+def test_two_heroes_stronger(get_data_for_who_stronger):
+    hero1, hero2 = get_data_for_who_stronger
+    print(hero1)
+    print()
+    print(hero2)
+    if hero1.json()['power'] > hero2.json()['power']:
+        print(f"Winner {hero1.json()['name']}")
+    elif hero1.json()['power'] < hero2.json()['power']:
+        print(f"Winner {hero2.json()['name']}")
+    else:
+        print("Draw")
 
 
 @pytest.mark.parametrize('a,b,c', [gen_param() for _ in range(10)])
