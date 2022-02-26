@@ -1,0 +1,18 @@
+(venv) C:\Users\Nikita\PycharmProjects\ozon_qa_pyhon\5\5.1>pylint simple decorator_with_parameters.py
+************* Module simple
+simple:1:0: F0001: No module named simple (fatal)
+************* Module decorator_with_parameters
+decorator_with_parameters.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+decorator_with_parameters.py:4:0: C0116: Missing function or method docstring (missing-function-docstring)
+decorator_with_parameters.py:9:16: R1705: Unnecessary "else" after "return" (no-else-return)
+decorator_with_parameters.py:21:0: C0116: Missing function or method docstring (missing-function-docstring)
+decorator_with_parameters.py:32:0: E0102: function already defined line 21 (function-redefined)
+decorator_with_parameters.py:32:0: C0116: Missing function or method docstring (missing-function-docstring)
+
+-----------------------------------
+Your code has been rated at 4.44/10
+
+
+(venv) C:\Users\Nikita\PycharmProjects\ozon_qa_pyhon\5\5.1>flake8
+.\decorator_with_parameters.py:7:13: E265 block comment should start with '# '
+.\decorator_with_parameters.py:15:13: E265 block comment should start with '# '

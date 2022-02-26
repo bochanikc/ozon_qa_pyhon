@@ -1,6 +1,16 @@
+import random
 import requests
-from lxml import html, etree
+from lxml import html
 
+
+def gen_param():
+    a = random.random()
+    b = random.random()
+    c = a + b
+    return a, b, c
+
+def get_random_id():
+    return random.randint(1, 701)
 
 def get_heroes():
     heroes = []

@@ -1,5 +1,6 @@
-from helpers import get_woman_ids
+from second.pytest_homework.helpers import get_woman_ids, gen_param
 import pytest
+
 
 
 @pytest.mark.parametrize('id, answer_name',
@@ -17,5 +18,9 @@ def test_woman_is_woman(get_hero_by_id):
 
 def test_two_heroes_stronger(who_stronger):
     who_stronger
-    #id1, id2, hero = who_stronger
+    # id1, id2, hero = who_stronger
 
+
+@pytest.mark.parametrize('a,b,c', [gen_param() for _ in range(10)])
+def test_sum(a, b, c):
+    assert a + b == c
