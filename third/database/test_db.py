@@ -18,7 +18,6 @@ def connect():
 def create_test_table():
     try:
         connection, cursor = connect()
-        # SQL query to create a new table
         create_table_query = '''CREATE TABLE animals
                                 (
                                     id serial not null primary key,
@@ -27,7 +26,6 @@ def create_test_table():
                                     country varchar(40),
                                     place integer
                                 );'''
-        # Execute a command: this creates a new table
         cursor.execute(create_table_query)
         connection.commit()
         print("Table created successfully")
@@ -43,7 +41,7 @@ def create_test_table():
                                ('Lion 5', 3, 'South Town', 32);'''
         cursor.execute(insert_table_query)
         connection.commit()
-        print("Add data to table")
+        print("Add data to table successfully")
 
     except (Exception, Error) as error:
         print("Error while connecting to PostgreSQL", error)
@@ -59,7 +57,6 @@ def create_test_table():
 def select_test_table():
     try:
         connection, cursor = connect()
-        # SQL query to create a new table
         test_table_query = '''SELECT name, age, country, place FROM animals
                                 WHERE name = 'Elephant';'''
         cursor.execute(test_table_query)
