@@ -50,3 +50,29 @@ SELECT * FROM users1
 JOIN location l on l.id = users1.location_id
 WHERE l.name = 'Moscow'
 limit 10;
+
+
+----------- 3. Подготовка данных для теста на Python -------------------
+CREATE TABLE animals
+(
+    id serial not null primary key,
+    name varchar(40),
+    age  integer,
+    country varchar(40),
+    place integer
+);
+
+INSERT INTO animals (name, age, country, place)
+VALUES ('Lion', 10, 'Johannesburg', 32),
+       ('Makaka', 3, 'Cape Town', 15),
+       ('Elephant', 32, 'Johannesburg', 2),
+       ('Spider', 2, 'South Town', 3),
+       ('Python', 3, 'North Town', 32),
+       ('Lion 2', 3, 'Johannesburg', 31),
+       ('Lion 3', 2, 'Johannesburg', 32),
+       ('Lion 4', 5, 'Johannesburg', 32),
+       ('Lion 5', 3, 'South Town', 32);
+
+
+SELECT name, age, country, place FROM animals
+WHERE name = 'Elephant';
