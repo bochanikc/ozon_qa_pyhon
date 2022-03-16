@@ -1,0 +1,122 @@
+<html>
+<head>
+
+    <style>
+    body{
+        background: #3366CC;
+    }
+
+    .main-div{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .nav{
+
+        display: flex;
+       
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .main-container{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        padding: 30px;
+       
+    }
+
+    .additional-container{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 30px;
+       
+    }
+
+    form{
+        background: white;
+        padding: 30px;
+    }
+    
+    .nav-item {
+        font: 30px;
+        color: white;
+        margin-left: 40px;
+        margin-right: 40px;
+    }
+
+    .nav-item:hover {
+        color: navy;
+        margin-left: 40px;
+        margin-right: 40px;
+        background: white;
+    }
+
+    textarea{
+        width: 100%;
+        height: 100px;
+    }
+
+    h1{
+        font-size: 60px;
+        color: white;
+    }
+
+    .theme{
+
+        background: white;
+        padding: 30px;
+    }
+
+    .mob-header{
+        font-size: 20px;
+        color: black;
+    }
+    .mob-text{
+        font-size: 18px;
+        font-style: italic;
+        color: black;
+    }
+
+    </style>
+
+</head>
+<body>
+    <div class="main-div">
+
+    <div class="nav">
+
+        <a href="/"><p class="nav-item">Back</p></a>
+
+    </div>
+    <div class="main-container">
+    <div class="additional-container">
+       
+        {% for user_comment in comments %}
+            <div class="theme">
+            <h2 class="mob-header"> {{ user_comment.author }} </h2>
+            <p class="mob-text">{{ user_comment.record}} </p>
+
+        </div>
+        <br><br>
+
+        {% endfor %}
+
+    </div>
+</div>
+
+    <div class="main-container">
+
+    <br>
+    <i><h1> QA-Route 256: docker homework </h1></i>
+    </div>
+
+</div>
+
+
+
+</body>
+</html>
