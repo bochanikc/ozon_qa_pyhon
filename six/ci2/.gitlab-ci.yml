@@ -1,0 +1,69 @@
+image: gitlab.ozon.dev/qa/students/dependency_proxy/containers/golang:latest
+
+stages:
+  - build
+  - publish
+  - deploy
+  - e2e
+  - post-deploy
+  - close
+
+build:
+  stage: build
+  script:
+    - echo "Build"
+
+unit:
+  stage: build
+  script:
+    - echo "Unit testing"
+
+linter:
+  stage: build
+  script:
+    - echo "Linter"
+
+create image:
+  stage: publish
+  script:
+    - echo "Create image for dev/stg"
+
+release image:
+  stage: publish
+  script:
+    - echo "Create image for prod"
+
+development:
+  stage: deploy
+  script:
+    - echo "Deploy to dev environment"
+
+staging:
+  stage: deploy
+  script:
+    - echo "Deploy to stg environment"
+
+staging latest:
+  stage: deploy
+  script:
+    - echo "Update stg with last version"
+
+production:
+  stage: deploy
+  script:
+    - echo "Deploy to prod environment"
+
+test:
+  stage: e2e
+  script:
+    - echo "API testing on stg"
+
+ready to prod:
+  stage: close
+  script:
+    - echo "Ready to prod"
+
+close release:
+  stage: close
+  script:
+    - echo "Ready to prod"

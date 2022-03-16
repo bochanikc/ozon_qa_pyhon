@@ -1,0 +1,106 @@
+include:
+  - local: vars.yml
+
+stages:
+  - dep
+  - build
+  - test
+
+variables:
+    GLOBAL_NAME: 'asvezh: global'
+
+.build_template:
+    stage: build
+    before_script:
+      - echo 'run hidden job'
+
+show_cache:
+    stage: dep
+    image: python
+    script:
+      - apt update -qq && apt install -y tree
+      - tree libs -L 2
+
+check_version:
+    stage: dep
+    image: python
+    variables:
+      GLOBAL_NAME: 'asvezh: local'
+      LOCAL_NAME: 'asvezh: local2'
+    before_script:
+      - python --version
+    script:
+      - python -c "import this"
+      - echo $ADD_DATA
+      - echo $GLOBAL_NAME
+      - echo $LOCAL_NAME
+
+hidden_jobs:
+    extends: .build_template
+    script:
+      - echo 'run from main job'
+
+check_artifacts:
+    stage: build
+    image: python
+    variables:
+      FILE_NAME_TEST: 'test_artifacts.log'
+    script:
+      - export
+      - mkdir backup && cd backup
+      - echo "$CI_COMMIT_AUTHOR - $ADD_DATA" > $FILE_NAME_TEST
+      - ls
+      - cat $FILE_NAME_TEST
+    artifacts:
+      expire_in: 30 min
+      paths:
+        - backup/
+
+check_cached:
+    stage: build
+    image: python
+    when: on_failure
+    script:
+      - apt update -qq && apt install -y pip tree
+      - pip install -r requirements.txt
+      - mkdir -p libs
+      - tree libs -L 2
+      - pip freeze > libs/dependency_list.md
+
+    cache:
+      paths:
+        - libs/
+
+ready_to_die:
+    stage: build
+    image: python
+    when: always
+    allow_failure: false
+    script:
+      - pip install -r requirements.txt
+
+.run-tests:
+    stage: test
+    image: python
+    before_script:
+      - echo 'here hidden run-jobs'
+
+auto_tests:
+    extends: .run-tests
+    when: always
+    script:
+      - echo 'autotests here'
+
+manual_tests:
+    extends: .run-tests
+    when: manual
+    script:
+      - echo 'manual_tests here'
+
+load_tests:
+    extends: .run-tests
+    when: on_success
+    script:
+      - echo 'load_tests here'
+    only:
+      - ci
