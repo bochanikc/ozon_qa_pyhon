@@ -1,0 +1,2 @@
+docker build -t app:final .
+docker run --rm -p 8081:5000 --name app_container app:final
