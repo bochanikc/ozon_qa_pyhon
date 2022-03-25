@@ -8,7 +8,22 @@ stages:
 
 variables:
     GLOBAL_NAME: 'asvezh: global'
-
+--------------------------------------------------
+check:
+    stage: dep
+    image: python
+    variables:
+      FILE_NAME_TEST: 'flake8.log'
+    before_script:
+      - pip install flake8
+    script:
+      - cd ./framework/tests
+      - flake8 --max-line-length=120 --ignore=W605,W504 > $FILE_NAME_TEST
+    artifacts:
+      expire_in: 7 day
+      paths:
+        - backup/
+-----------------------------------------------
 .build_template:
     stage: build
     before_script:
