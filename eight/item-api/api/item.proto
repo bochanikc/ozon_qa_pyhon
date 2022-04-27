@@ -1,0 +1,41 @@
+syntax = "proto3";
+package item;
+option go_package = "gitlab.ozon.dev/qa/teachers/qa-route-256/item-api/api;item";
+
+import "google/api/annotations.proto";
+
+service Item {
+  // Создание товара
+  rpc CreateItem(CreateItemRequest) returns (CreateItemResponse) {
+    option (google.api.http) = {
+      post: "/v1/item"
+      body: "*"
+    };
+  }
+  // Получение информации о товаре
+  rpc GetItem(GetItemRequest) returns (GetItemResponse) {
+    option (google.api.http) = {
+      get: "/v1/item/{id}"
+    };
+  }
+}
+
+message CreateItemRequest{
+  // Название
+  string title = 1;
+  // Описание
+  string description = 2;
+}
+message CreateItemResponse{
+  int64 id = 1;
+}
+
+message GetItemRequest{
+  int64 id = 1;
+}
+message GetItemResponse{
+  // Название
+  string title = 1;
+  // Описание
+  string description = 2;
+}
