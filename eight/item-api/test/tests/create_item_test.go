@@ -32,12 +32,12 @@ func TestCreateItem(t *testing.T) {
 		{
 			"multiline description should pass",
 			"test title",
-			`This is most longest description in the world! OMG!!!
-This is most longest description in the world! OMG!!! 
-This is most longest description in the world! OMG!!! 
-This is most longest description in the world! OMG!!! 
-This is most longest description in the world! OMG!!! 
-This is most longest description in the world! OMG!!! 
+			`This is most longest description in the world! OMG!!! LOL! EXPLORE YOUR PASSION!
+This is most longest description in the world! OMG!!! LOL! EXPLORE YOUR PASSION!
+This is most longest description in the world! OMG!!! LOL! EXPLORE YOUR PASSION!
+This is most longest description in the world! OMG!!! LOL! EXPLORE YOUR PASSION!
+This is most longest description in the world! OMG!!! LOL! EXPLORE YOUR PASSION!
+This is most longest description in the world! OMG!!! LOL! EXPLORE YOUR PASSION!
 `,
 		},
 	}
