@@ -18,17 +18,31 @@ func TestGetItem(t *testing.T) {
 		t.Fatalf("grpc.Dial() err: %v", err)
 	}
 	defer conn.Close()
-
 	itemClient := item.NewItemClient(conn)
 
-	req := item.GetItemRequest{
-		Id: 1,
-	}
+	t.Run("get new item", func(t *testing.T) {
+		title := "test title"
+		description := "test description"
 
-	res, err := itemClient.GetItem(ctx, &req)
+		// arrange
+		createItemReq := item.CreateItemRequest{
+			Title:       title,
+			Description: description,
+		}
+		createItemRes, err := itemClient.CreateItem(ctx, &createItemReq)
 
-	require.NoError(t, err)
-	assert.NotZero(t, res.Description)
-	assert.NotZero(t, res.GetTitle())
-	t.Logf("id: %v, des: %v, title: %v", req.Id, res.Description, res.Title)
+		//act
+		id := createItemRes.Id
+		t.Logf("createItemRes.Id: %v", id)
+		getItemReq := item.GetItemRequest{
+			Id: id,
+		}
+		getItemRes, err := itemClient.GetItem(ctx, &getItemReq)
+
+		//assert
+		require.NoError(t, err)
+		assert.Equal(t, description, getItemRes.Description)
+		assert.Equal(t, title, getItemRes.Title)
+		t.Logf("id: %v, des: %v, title: %v", id, getItemRes.Description, getItemRes.Title)
+	})
 }
