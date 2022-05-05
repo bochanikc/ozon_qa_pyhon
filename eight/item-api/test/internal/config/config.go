@@ -10,7 +10,7 @@ import (
 )
 
 type Config struct {
-	Host string `envconfig:"GRPC_HOST" default:"localhost:50051"`
+	Host string `envconfig:"GRPC_HOST" default:"localhost:50051"` // export GRPC_HOST=localhost:50051 - добавление хоста в env
 }
 
 func ProcessConfig() Config {

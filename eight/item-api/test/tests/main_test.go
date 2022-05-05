@@ -21,6 +21,7 @@ var (
 )
 
 func TestMain(m *testing.M) {
+	// setup integration tests
 	cfg := config.ProcessConfig()
 	ctx = context.Background()
 
@@ -33,6 +34,7 @@ func TestMain(m *testing.M) {
 	if err != nil {
 		panic(fmt.Errorf("grpc.Dial() err: %v", err))
 	}
+	// teardown integration tests "defer"
 	defer conn.Close()
 
 	itemClient = item.NewItemClient(conn)

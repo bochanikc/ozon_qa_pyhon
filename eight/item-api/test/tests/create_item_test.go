@@ -43,6 +43,8 @@ This is most longest description in the world! OMG!!! LOL! EXPLORE YOUR PASSION!
 	}
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
+			t.Parallel()
+
 			req := item.CreateItemRequest{
 				Title:       tc.title,
 				Description: tc.description,
@@ -56,6 +58,8 @@ This is most longest description in the world! OMG!!! LOL! EXPLORE YOUR PASSION!
 		})
 	}
 	t.Run("empty description should fail", func(t *testing.T) {
+		t.Parallel()
+
 		req := item.CreateItemRequest{
 			Title: "test title",
 		}
@@ -67,6 +71,8 @@ This is most longest description in the world! OMG!!! LOL! EXPLORE YOUR PASSION!
 		assert.Contains(t, err.Error(), "empty description")
 	})
 	t.Run("empty title should fail", func(t *testing.T) {
+		t.Parallel()
+
 		req := item.CreateItemRequest{
 			Description: "empty description",
 		}
@@ -78,6 +84,8 @@ This is most longest description in the world! OMG!!! LOL! EXPLORE YOUR PASSION!
 		assert.Contains(t, err.Error(), "empty title")
 	})
 	t.Run("empty request should fail", func(t *testing.T) {
+		t.Parallel()
+
 		req := item.CreateItemRequest{}
 
 		_, err := itemClient.CreateItem(ctx, &req)
